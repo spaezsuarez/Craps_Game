@@ -95,8 +95,9 @@ public class MenuLogin extends JFrame {
                 if(data == null ){
                     JOptionPane.showMessageDialog(null, "Asegurese de estar registrado","Error",JOptionPane.ERROR_MESSAGE); 
                 }else{
-                    MenuPartida menu = new MenuPartida();
+                    MenuPartida menu = new MenuPartida(data);
                     menu.initTempalte();
+                    dispose();
                 }
                 
                 

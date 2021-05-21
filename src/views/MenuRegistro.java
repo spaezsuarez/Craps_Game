@@ -127,7 +127,7 @@ public class MenuRegistro extends JFrame {
                 Jugador jugador = new Jugador(inputName.getText(),passUno,Double.parseDouble(inputSaldoInicial.getText()));
                 try {
                     instance.registrarDatosJugador(jugador);
-                    JOptionPane.showMessageDialog(null, "Datos registrados exitosamente","",JOptionPane.OK_OPTION); 
+                    JOptionPane.showMessageDialog(null, "Datos registrados exitosamente","",JOptionPane.INFORMATION_MESSAGE); 
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "Ocurrio un error","Error",JOptionPane.ERROR_MESSAGE);
                 }
