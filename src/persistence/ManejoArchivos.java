@@ -42,6 +42,31 @@ public class ManejoArchivos {
         bw.close();
 
     }
+    
+    public void editarDatosJugador(Jugador jugador) throws IOException{
+        String[] datosJugador = new String[3];
+        String oldData = "";
+        
+        FileReader f = new FileReader(rutaArchivo);
+        BufferedReader b = new BufferedReader(f);
+        
+        String cadena;
+
+        while ((cadena = b.readLine()) != null) {
+            datosJugador = cadena.split(",");
+            if(datosJugador[0].equals(jugador.getNombre())){
+                oldData += jugador.toString()+"\n";
+            }else{
+                oldData += cadena + " \n";
+            }
+        }
+        File archivo = new File(rutaArchivo);
+        BufferedWriter bw;
+        bw = new BufferedWriter(new FileWriter(archivo));
+        bw.write(oldData);
+        bw.close();
+        b.close();
+    }
 
     public static ManejoArchivos getInstance() {
         if (instance == null) {
