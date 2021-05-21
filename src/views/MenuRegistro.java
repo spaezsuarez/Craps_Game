@@ -8,8 +8,6 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -129,6 +127,7 @@ public class MenuRegistro extends JFrame {
                 Jugador jugador = new Jugador(inputName.getText(),passUno,Double.parseDouble(inputSaldoInicial.getText()));
                 try {
                     instance.registrarDatosJugador(jugador);
+                    JOptionPane.showMessageDialog(null, "Datos registrados exitosamente","",JOptionPane.OK_OPTION); 
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "Ocurrio un error","Error",JOptionPane.ERROR_MESSAGE);
                 }
