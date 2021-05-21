@@ -1,14 +1,9 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -17,20 +12,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-public class MenuInicio extends JFrame {
+public class MenuInicio extends Menu {
     
-    private final int ANCHO, ALTO;
     private static MenuInicio instance;
     
     private JPanel backGround;
-    private JButton btnIniciar, btnRegistrarse, btnAbonar;
+    private JButton btnIniciar, btnRegistrarse, btnAbonar,btnExit;
     private JMenuBar menuBar;
     private JMenu opciones;
     private JMenuItem reglas,acercaDe;
     
     private MenuInicio() {
-        ANCHO = 600;
-        ALTO = 500;
+        super.ANCHO = 600;
+        super.ALTO = 600;
     }
     
     public static MenuInicio getInstance(){
@@ -40,16 +34,8 @@ public class MenuInicio extends JFrame {
         return instance;
     }
     
-    private void setImagen(JLabel label, String nombreImg) {
-        String rutaBase = "src/resources/" + nombreImg;
-        ImageIcon instr = new ImageIcon(rutaBase);
-        Image imginstr = instr.getImage();
-        Image nuevaimagen = imginstr.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon imagen = new ImageIcon(nuevaimagen);
-        label.setIcon(imagen);
-    }
-    
-    private void initComponents() {
+   
+    protected void initComponents() {
         menuBar = new JMenuBar();
         menuBar.setBackground(Color.WHITE);
         
@@ -112,16 +98,26 @@ public class MenuInicio extends JFrame {
         btnAbonar.setBackground(new Color(51,157,179));
         btnAbonar.setForeground(Color.WHITE);
         backGround.add(btnAbonar);
+        
+        btnExit = new JButton("Salir");
+        btnExit.setSize(200, 30);
+        btnExit.setLocation((this.getWidth() - btnExit.getWidth()) / 2, 450);
+        btnExit.setFocusable(false);
+        btnExit.setFont(new Font("Arial", Font.PLAIN, 20));
+        btnExit.setBackground(new Color(51,157,179));
+        btnExit.setForeground(Color.WHITE);
+        backGround.add(btnExit);
     }
     
-    private void initListeners() {
+    protected void initListeners() {
         
         reglas.addActionListener((event) -> {
             
             String result = "Inicialmente se realizara el lanzamiento de dos dados.\nCuando esto ocurra se tomaran ciertas reglas dependiendo del valor obtenido.\n"+
             "1) Si en el lanzamiento inicial el valor es 7 u 11 el jugador gana.\n" +
             "2) Si el valor es distinto, el jugador seguira lanzando hasta obtener el mismo número.\n"+ 
-            "3) Si al lanzar por segunda vez obtiene el valor de 7 el jugador pierde.";
+            "3) Si al lanzar por segunda vez obtiene el valor de 7 el jugador pierde."+
+            "4) Si al lanzar por primera vez obtiene el valor de 2,3 o 12 el jugador pierde.";
             JOptionPane.showMessageDialog(null,result,"Reglas de este juego",JOptionPane.QUESTION_MESSAGE);
         });
         
@@ -137,19 +133,7 @@ public class MenuInicio extends JFrame {
             dispose();
         });
         
-        btnIniciar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                btnIniciar.setBackground(Color.WHITE);
-                btnIniciar.setForeground(Color.BLACK);
-                btnIniciar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                btnIniciar.setBackground(new Color(51,157,179));
-                btnIniciar.setForeground(Color.WHITE);
-            }
-        });
+        setHoverEffect(btnIniciar);
         
         //btnRegistrar
         btnRegistrarse.addActionListener((event) -> {
@@ -158,53 +142,23 @@ public class MenuInicio extends JFrame {
             dispose();
         });
         
-        btnRegistrarse.addMouseListener(new MouseAdapter() {
-           @Override
-           public void mouseEntered(MouseEvent evt) {
-                btnRegistrarse.setBackground(Color.WHITE);
-                btnRegistrarse.setForeground(Color.BLACK);
-                btnRegistrarse.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-           @Override
-            public void mouseExited(MouseEvent evt) {
-                btnRegistrarse.setBackground(new Color(51,157,179));
-                btnRegistrarse.setForeground(Color.WHITE);
-            }
-        });
+        setHoverEffect(btnRegistrarse);
         
         //btnAbonar
         btnAbonar.addActionListener((event) -> {
-            
+            MenuAbonar menu = new MenuAbonar();
+            menu.initTemplate();
+            dispose();
         });
         
-        btnAbonar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                btnAbonar.setBackground(Color.WHITE);
-                btnAbonar.setForeground(Color.BLACK);
-                btnAbonar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                btnAbonar.setBackground(new Color(51,157,179));
-                btnAbonar.setForeground(Color.WHITE);
-            }
+        setHoverEffect(btnAbonar);
+        
+        btnExit.addActionListener((event) -> {
+            System.exit(0);
         });
         
-    }
-    
-    public void initTemplate() {
-        setLayout(null);
-        setTitle("Craps");
-        Image icon = new ImageIcon(getClass().getResource("/resources/menus/dados.png")).getImage();
-        setIconImage(icon);
-        setSize(new Dimension(ANCHO, ALTO));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        initComponents();
-        initListeners();
-        setVisible(true);
+        setHoverEffect(btnExit);
+        
     }
     
 }

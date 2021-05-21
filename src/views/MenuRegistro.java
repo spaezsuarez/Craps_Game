@@ -1,16 +1,10 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -21,10 +15,8 @@ import models.Jugador;
 
 import persistence.ManejoArchivos;
 
-public class MenuRegistro extends JFrame {
+public class MenuRegistro extends Menu {
     
-    private final int ANCHO, ALTO;
-
     private JTextField inputName,inputSaldoInicial;
     private JPasswordField inputPassUno,inputPassDos;
     private JButton btnIniciar, btnVolver;
@@ -43,7 +35,7 @@ public class MenuRegistro extends JFrame {
         return result;
     }
     
-    private void initComponents() {
+    protected void initComponents() {
         JLabel title = new JLabel("Registrarse");
         title.setSize(new Dimension(300,30));
         title.setLocation((this.getWidth()-title.getWidth())/2, 20);
@@ -118,7 +110,7 @@ public class MenuRegistro extends JFrame {
         add(btnVolver);
     }
 
-    private void initListeners() {
+    protected void initListeners() {
         btnIniciar.addActionListener((event) -> {
             String passUno = this.getStringPass(inputPassUno.getPassword());
             String passDos = this.getStringPass(inputPassDos.getPassword());
@@ -142,55 +134,13 @@ public class MenuRegistro extends JFrame {
             }
         });
 
-        btnIniciar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                btnIniciar.setBackground(Color.WHITE);
-                btnIniciar.setForeground(Color.BLACK);
-                btnIniciar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                btnIniciar.setBackground(new Color(51, 157, 179));
-                btnIniciar.setForeground(Color.WHITE);
-            }
-        });
+        setHoverEffect(btnIniciar);
         
         btnVolver.addActionListener((event) -> {
             MenuInicio.getInstance().initTemplate();
             dispose();
         });
 
-        btnVolver.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent evt) {
-                btnVolver.setBackground(Color.WHITE);
-                btnVolver.setForeground(Color.BLACK);
-                btnVolver.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent evt) {
-                btnVolver.setBackground(new Color(51, 157, 179));
-                btnVolver.setForeground(Color.WHITE);
-            }
-        });
+        setHoverEffect(btnVolver);
     }
-
-    public void initTemplate() {
-        setLayout(null);
-        getContentPane().setBackground(Color.WHITE);
-        Image icon = new ImageIcon(getClass().getResource("/resources/menus/dados.png")).getImage();
-        setIconImage(icon);
-        setTitle("Craps");
-        setSize(new Dimension(ANCHO, ALTO));
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        initComponents();
-        initListeners();
-        setVisible(true);
-    }
-    
 }
