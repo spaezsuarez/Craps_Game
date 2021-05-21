@@ -36,8 +36,13 @@ public class Jugador {
         return saldo;
     }
     
-    public int  lanzarDados(Dado dadoUno,Dado dadoDos){
-        return dadoUno.obtenerValor() + dadoDos.obtenerValor();
+    public int[]  lanzarDados(Dado dadoUno,Dado dadoDos){
+        int[] result = new int[3];
+        int valorUno = dadoUno.obtenerValor(), valorDos = dadoDos.obtenerValor();
+        result[0] = valorUno;
+        result[1] = valorDos;
+        result[2] = valorUno + valorDos;
+        return result;
     }
 
     @Override
