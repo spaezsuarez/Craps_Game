@@ -196,6 +196,8 @@ public class MenuInicio extends JFrame {
     public void initTemplate() {
         setLayout(null);
         setTitle("Craps");
+        Image icon = new ImageIcon(getClass().getResource("/resources/menus/dados.png")).getImage();
+        setIconImage(icon);
         setSize(new Dimension(ANCHO, ALTO));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);

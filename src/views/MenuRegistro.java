@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -14,6 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import models.Jugador;
+
+import persistence.ManejoArchivos;
 
 public class MenuRegistro extends JFrame {
     
@@ -117,7 +125,17 @@ public class MenuRegistro extends JFrame {
             String passUno = this.getStringPass(inputPassUno.getPassword());
             String passDos = this.getStringPass(inputPassDos.getPassword());
             if(passUno.equals(passDos)){
-                
+                ManejoArchivos instance = ManejoArchivos.getInstance();
+                Jugador jugador = new Jugador(inputName.getText(),passUno,Double.parseDouble(inputSaldoInicial.getText()));
+                try {
+                    instance.registrarDatosJugador(jugador);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Ocurrio un error","Error",JOptionPane.ERROR_MESSAGE);
+                }
+                inputName.setText("");
+                inputPassUno.setText("");
+                inputPassDos.setText("");
+                inputSaldoInicial.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "Las contraseñas deben ser iguales","Error",JOptionPane.ERROR_MESSAGE);
                 inputPassUno.setText("");
@@ -164,6 +182,8 @@ public class MenuRegistro extends JFrame {
     public void initTemplate() {
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
+        Image icon = new ImageIcon(getClass().getResource("/resources/menus/dados.png")).getImage();
+        setIconImage(icon);
         setTitle("Craps");
         setSize(new Dimension(ANCHO, ALTO));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

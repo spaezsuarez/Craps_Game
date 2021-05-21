@@ -7,12 +7,17 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import persistence.ManejoArchivos;
 
 public class MenuLogin extends JFrame {
 
@@ -34,6 +39,14 @@ public class MenuLogin extends JFrame {
         Image nuevaimagen = imginstr.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon imagen = new ImageIcon(nuevaimagen);
         label.setIcon(imagen);
+    }
+    
+    private String getStringPass(char[] pass){
+        String result = "";
+        for(int i = 0; i < pass.length;i++){
+            result += pass[i];
+        }
+        return result;
     }
 
     private void initComponents() {
@@ -78,7 +91,19 @@ public class MenuLogin extends JFrame {
 
     private void initListeners() {
         btnIniciar.addActionListener((event) -> {
-            
+            ManejoArchivos manejador = ManejoArchivos.getInstance();
+            try {
+                String[] data = manejador.obtenerDatosJugador(inputName.getText(), getStringPass(inputPass.getPassword()));
+                if(data == null ){
+                    JOptionPane.showMessageDialog(null, "Asegurese de estar registrado","Error",JOptionPane.ERROR_MESSAGE); 
+                }else{
+                    
+                }
+                
+                
+            } catch (IOException ex) {
+                
+            }
         });
 
         btnIniciar.addMouseListener(new MouseAdapter() {
@@ -119,6 +144,8 @@ public class MenuLogin extends JFrame {
 
     public void initTemplate() {
         setLayout(null);
+        Image icon = new ImageIcon(getClass().getResource("/resources/menus/dados.png")).getImage();
+        setIconImage(icon);
         getContentPane().setBackground(Color.WHITE);
         setTitle("Craps");
         setSize(new Dimension(ANCHO, ALTO));
