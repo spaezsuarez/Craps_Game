@@ -54,7 +54,7 @@ public class ManejoArchivos {
 
         while ((cadena = b.readLine()) != null) {
             datosJugador = cadena.split(",");
-            if(datosJugador[0].equals(jugador.getNombre())){
+            if(datosJugador[0].equals(jugador.getNombre()) && datosJugador[1].equals(jugador.getContraseña())){
                 oldData += jugador.toString()+"\n";
             }else{
                 oldData += cadena + " \n";
