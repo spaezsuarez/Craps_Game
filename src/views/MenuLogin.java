@@ -8,8 +8,6 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -97,7 +95,8 @@ public class MenuLogin extends JFrame {
                 if(data == null ){
                     JOptionPane.showMessageDialog(null, "Asegurese de estar registrado","Error",JOptionPane.ERROR_MESSAGE); 
                 }else{
-                    
+                    MenuPartida menu = new MenuPartida();
+                    menu.initTempalte();
                 }
                 
                 
