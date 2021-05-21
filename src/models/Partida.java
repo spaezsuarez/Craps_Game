@@ -1,8 +1,5 @@
 package models;
 
-import java.util.Objects;
-
-
 public class Partida {
     
     private Dado dadoUno,dadoDos;
