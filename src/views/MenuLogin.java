@@ -3,9 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.io.IOException;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -24,31 +22,35 @@ public class MenuLogin extends Menu {
         super.ALTO = 400;
     }
 
-    private String getStringPass(char[] pass) {
-        String result = "";
-        for (int i = 0; i < pass.length; i++) {
-            result += pass[i];
-        }
-        return result;
-    }
-
     protected void initComponents() {
         JLabel image = new JLabel();
         image.setSize(new Dimension(150, 150));
         image.setLocation((this.getWidth() - image.getWidth()) / 2, 20);
         setImagen(image, "menus/user.png");
         add(image);
+        
+        JLabel titleName = new JLabel("Nombre: ");
+        titleName.setSize(new Dimension(100,20));
+        titleName.setFont(new Font("Arial",Font.PLAIN,15));
+        titleName.setLocation((this.getWidth()-titleName.getWidth())/2-100, 200);
+        add(titleName);
 
         inputName = new JTextField();
         inputName.setSize(200, 30);
-        inputName.setLocation((this.getWidth() - inputName.getWidth()) / 2, 200);
+        inputName.setLocation((this.getWidth() - inputName.getWidth()) / 2+50, 200);
         inputName.setHorizontalAlignment(JTextField.CENTER);
         inputName.setFont(new Font("Arial", Font.PLAIN, 20));
         add(inputName);
+        
+        JLabel titlePassword = new JLabel("Contraseña: ");
+        titlePassword.setSize(new Dimension(100,20));
+        titlePassword.setFont(new Font("Arial",Font.PLAIN,15));
+        titlePassword.setLocation((this.getWidth()-titlePassword.getWidth())/2-100, 250);
+        add(titlePassword);
 
         inputPass = new JPasswordField();
         inputPass.setSize(200, 30);
-        inputPass.setLocation((this.getWidth() - inputPass.getWidth()) / 2, 250);
+        inputPass.setLocation((this.getWidth() - inputPass.getWidth()) / 2+50, 250);
         inputPass.setHorizontalAlignment(JTextField.CENTER);
         inputPass.setFont(new Font("Arial", Font.PLAIN, 20));
         add(inputPass);
@@ -84,7 +86,6 @@ public class MenuLogin extends Menu {
                     MenuInicio.getInstance().initTemplate();
                     dispose();
                 } else {
-                    System.out.println(data[0]);
                     MenuPartida menu = new MenuPartida(data);
                     menu.initTemplate();
                     dispose();

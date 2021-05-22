@@ -16,13 +16,20 @@ public abstract class Menu extends JFrame {
     protected int ANCHO, ALTO;
 
     protected void setImagen(JLabel label, String nombreImagen) {
-        System.out.println(nombreImagen);
         String rutaBase = "src/resources/" + nombreImagen;
         ImageIcon instr = new ImageIcon(rutaBase);
         Image imginstr = instr.getImage();
         Image nuevaimagen = imginstr.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon imagen = new ImageIcon(nuevaimagen);
         label.setIcon(imagen);
+    }
+    
+    protected String getStringPass(char[] pass){
+        String result = "";
+        for(int i = 0; i < pass.length;i++){
+            result += pass[i];
+        }
+        return result;
     }
 
     protected void setHoverEffect(JButton btn) {

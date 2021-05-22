@@ -57,13 +57,13 @@ public class MenuPartida extends Menu {
         dadoUno = new JLabel();
         dadoUno.setSize(new Dimension(100, 100));
         dadoUno.setLocation((this.getWidth() - dadoUno.getWidth()) / 2 - 100, 270);
-        setImagen(dadoUno, "game/dado1.png");
+        setImagen(dadoUno, "game/1.png");
         add(dadoUno);
 
         dadoDos = new JLabel();
         dadoDos.setSize(new Dimension(100, 100));
         dadoDos.setLocation((this.getWidth() - dadoDos.getWidth()) / 2 + 100, 270);
-        setImagen(dadoDos, "game/dado1.png");
+        setImagen(dadoDos, "game/1.png");
         add(dadoDos);
 
         btnJugar = new JButton("Tirar");
@@ -98,8 +98,8 @@ public class MenuPartida extends Menu {
                     int[] result = partida.jugarRonda();
                     inputApuesta.setEditable(false);
 
-                    setImagen(dadoUno, "game/dado" + result[0] + ".png");
-                    setImagen(dadoUno, "game/dado" + result[1] + ".png");
+                    setImagen(dadoUno, "game/" + result[0] + ".png");
+                    setImagen(dadoDos, "game/" + result[1] + ".png");
                     System.out.println("Result: " + result[2]);
                     repaint();
 
@@ -112,16 +112,10 @@ public class MenuPartida extends Menu {
                         repaint();
                         insManejoArchivos.editarDatosJugador(partida.getJugador());
 
-                        setImagen(dadoUno, "game/dado1.png");
-                        setImagen(dadoUno, "game/dado1.png");
                         inputApuesta.setText("");
-
                         partida.setValorInicial(null);
                         partida.setValorSecundario(null);
-                        
                         inputApuesta.setEditable(true);
-
-                        repaint();
 
                     } else if (partida.isResult() != null && partida.isResult().equals(Boolean.FALSE)) {
                         JOptionPane.showMessageDialog(null, "Perdio", "Lo sentimos", JOptionPane.ERROR_MESSAGE);
@@ -132,6 +126,10 @@ public class MenuPartida extends Menu {
                         inputApuesta.setEditable(true);
                         repaint();
                     }
+                    
+                    setImagen(dadoUno, "game/1.png");
+                    setImagen(dadoDos, "game/1.png");
+                    repaint();
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Asegurese que tiene suficient dinero para apostar", "Error", JOptionPane.ERROR_MESSAGE);

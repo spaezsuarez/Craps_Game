@@ -27,14 +27,6 @@ public class MenuRegistro extends Menu {
         ALTO = 550;
     }
     
-    private String getStringPass(char[] pass){
-        String result = "";
-        for(int i = 0; i < pass.length;i++){
-            result += pass[i];
-        }
-        return result;
-    }
-    
     protected void initComponents() {
         JLabel title = new JLabel("Registrarse");
         title.setSize(new Dimension(300,30));
