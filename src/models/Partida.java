@@ -74,17 +74,12 @@ public class Partida {
     public void determinarResultado(){
         
         if(valorInicial == 7 || valorInicial == 11){
-            System.out.println("Caso 1");
             result = Boolean.TRUE;
         }else if(valorInicial == 2 || valorInicial == 3 || valorInicial == 12){
-            System.out.println("Caso 2");
             result = Boolean.FALSE;
         }else if(valorInicial.equals(valorSecundario) && valorSecundario != null && valorInicial != null){
-            System.out.println("Caso 3");
-            System.out.println("");
              result = Boolean.TRUE;
         }else if((valorInicial != null && valorSecundario != null)&&( valorInicial != 7 && valorInicial != 11) && valorSecundario == 7){
-            System.out.println("Caso 4");
             result = Boolean.FALSE;
         }else{
             result = null;
